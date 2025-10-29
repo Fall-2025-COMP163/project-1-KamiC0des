@@ -40,6 +40,8 @@ def create_character(name, character_class='Monk'):
         char_gold = 60
     elif character_class == "Monk":
         char_gold = 45
+    else:
+        char_gold = 25
 
     character = {
         "name": name,
@@ -86,7 +88,9 @@ def calculate_stats(character_class, level):
         magic = 6 + (level * 2)
         health = 50 + (level * 3)
     else:
-        return None
+        strength = 5 + (level * 2)
+        magic = 5 + (level * 2)
+        health = 80 + (level * 2)
     return strength, magic, health
 
 def save_character(character, filename):
