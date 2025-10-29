@@ -20,7 +20,7 @@ def create_character(name, character_class='Monk'):
     # TODO: Implement this function
     # Remember to use calculate_stats() function for stat calculation
     character_class = character_class.capitalize()
-    classes = ["Wizard", "Sorcerer", "Warlock", "Barbarian", "Monk"]
+    classes = ["Warrior", "Mage", "Rogue", "Cleric"]
 
     if character_class not in classes:
         print("Error: Invalid character class: " + character_class)
@@ -30,16 +30,14 @@ def create_character(name, character_class='Monk'):
     character_stats = calculate_stats(character_class, level)
 
     # Gold Values
-    if character_class == "Wizard":
+    if character_class == "Warrior":
         char_gold = 100
-    elif character_class == "Sorcerer":
+    elif character_class == "Mage":
         char_gold = 80
-    elif character_class == "Warlock":
+    elif character_class == "Rogue":
         char_gold = 75
-    elif character_class == "Barbarian":
+    elif character_class == "Cleric":
         char_gold = 60
-    elif character_class == "Monk":
-        char_gold = 45
     else:
         char_gold = 25
 
@@ -67,26 +65,22 @@ def calculate_stats(character_class, level):
     """
     # TODO: Implement this function
     # Return a tuple: (strength, magic, health)
-    if character_class == "Wizard":
+    if character_class == "Warrior":
         strength = 8 + (level * 4)
         magic = 10 + (level * 6)
         health = 75 + (level * 4)
-    elif character_class == "Sorcerer":
+    elif character_class == "Mage":
         strength = 7 + (level * 4)
         magic = 8 + (level * 4)
         health = 45 + (level * 2)
-    elif character_class == "Warlock":
+    elif character_class == "Rogue":
         strength = 5 + (level * 2)
         magic = 7 + (level * 4)
         health = 80 + (level * 4)
-    elif character_class == "Barbarian":
+    elif character_class == "Cleric":
         strength = 10 + (level * 6)
         magic = 5 + (level * 2)
         health = 90 + (level * 6)
-    elif character_class == "Monk":
-        strength = 9 + (level * 6)
-        magic = 6 + (level * 2)
-        health = 50 + (level * 3)
     else:
         strength = 5 + (level * 2)
         magic = 5 + (level * 2)
