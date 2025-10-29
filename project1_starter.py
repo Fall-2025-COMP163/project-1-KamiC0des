@@ -103,7 +103,7 @@ def save_character(character, filename):
     """
     # TODO: Implement this function
     # Remember to handle file errors gracefully
-    valid_keys = ["Name", "Class", "Level", "Strength", "Magic", "Health", "Gold"]
+    valid_keys = ["name", "class", "level", "strength", "magic", "health", "gold"]
     for key in valid_keys:
         if key not in character:
             return False
@@ -117,7 +117,7 @@ def save_character(character, filename):
         file.write(f"Health: {character["health"]}\n")
         file.write(f"Gold: {character["gold"]}\n")
     return True
-
+    
 def load_character(filename):
     """
     Loads character from text file
