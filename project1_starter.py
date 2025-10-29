@@ -1,13 +1,12 @@
 """
 COMP 163 - Project 1: Character Creator & Saving/Loading
-Name: [Your Name Here]
-Date: [Date]
+Name: Kami Strain
+Date: 10-20-2025
 
 AI Usage: [Document any AI assistance used]
 Example: AI helped with file I/O error handling logic in save_character function
 """
-
-def create_character(name, character_class):
+def create_character(name, character_class='Monk'):
     """
     Creates a new character dictionary with calculated stats
     Returns: dictionary with keys: name, class, level, strength, magic, health, gold
@@ -18,22 +17,75 @@ def create_character(name, character_class):
     """
     # TODO: Implement this function
     # Remember to use calculate_stats() function for stat calculation
-    pass
+    character_class = character_class.capitalize()
+    classes = ["Wizard", "Sorcerer", "Warlock", "Barbarian", "Monk"]
+
+    if character_class not in classes:
+        print("Error: Invalid character class: " + character_class)
+        return None
+
+    level = 1 # Starting level
+    character_stats = calculate_stats(character_class, level)
+
+    # Gold Values
+    if character_class == "Wizard":
+        gold = 100
+    elif character_class == "Sorcerer":
+        gold = 80
+    elif character_class == "Warlock":
+        gold = 75
+    elif character_class == "Barbarian":
+        gold = 60
+    elif character_class == "Monk":
+        gold = 45
+
+    character = {
+        "name": name,
+        "class": character_class,
+        "level": level,
+        "strength": character_stats[0],
+        "magic": character_stats[1],
+        "health": character_stats[2],
+        "gold": gold
+}
+    return character
 
 def calculate_stats(character_class, level):
     """
     Calculates base stats based on class and level
     Returns: tuple of (strength, magic, health)
-    
-    Design your own formulas! Ideas:
-    - Warriors: High strength, low magic, high health
-    - Mages: Low strength, high magic, medium health  
-    - Rogues: Medium strength, medium magic, low health
-    - Clerics: Medium strength, high magic, high health
+
+    - Wizards: Medium strength, high magic, medium health
+    - Sorcerers: Medium strength, medium magic, low health
+    - Warlocks: Low strength, medium magic, medium health
+    - Barbarians: High strength, low magic, high health
+    - Monks: High strength, low magic, low health
     """
     # TODO: Implement this function
     # Return a tuple: (strength, magic, health)
-    pass
+    if character_class == "Wizard":
+        strength = 8 + (level * 4)
+        magic = 10 + (level * 6)
+        health = 75 + (level * 4)
+    elif character_class == "Sorcerer":
+        strength = 7 + (level * 4)
+        magic = 8 + (level * 4)
+        health = 45 + (level * 2)
+    elif character_class == "Warlock":
+        strength = 5 + (level * 2)
+        magic = 7 + (level * 4)
+        health = 80 + (level * 4)
+    elif character_class == "Barbarian":
+        strength = 10 + (level * 6)
+        magic = 5 + (level * 2)
+        health = 90 + (level * 6)
+    elif character_class == "Monk":
+        strength = 9 + (level * 6)
+        magic = 6 + (level * 2)
+        health = 50 + (level * 3)
+    else:
+        return None
+    return (strength, magic, health)
 
 def save_character(character, filename):
     """
@@ -51,7 +103,15 @@ def save_character(character, filename):
     """
     # TODO: Implement this function
     # Remember to handle file errors gracefully
-    pass
+    with open(filename, "w") as file:
+        file.write(f"Character name: {character["name"]}\n")
+        file.write(f"Class: {character["class"]}\n")
+        file.write(f"Level: {character["level"]}\n")
+        file.write(f"Strength: {character["strength"]}\n")
+        file.write(f"Magic: {character["magic"]}\n")
+        file.write(f"Health: {character["health"]}\n")
+        file.write(f"Gold: {character["gold"]}\n")
+    return True
 
 def load_character(filename):
     """
@@ -78,7 +138,15 @@ def display_character(character):
     Gold: 100
     """
     # TODO: Implement this function
-    pass
+    print("=== CHARACTER SHEET ===")
+    print(f"Name: {character['name']}")
+    print(f"Class: {character['class']}")
+    print(f"Level: {character['level']}")
+    print(f"Strength: {character['strength']}")
+    print(f"Magic: {character['magic']}")
+    print(f"Health: {character['health']}")
+    print(f"Gold: {character['gold']}")
+    print("=======================")
 
 def level_up(character):
     """
@@ -88,8 +156,15 @@ def level_up(character):
     """
     # TODO: Implement this function
     # Remember to recalculate stats for the new level
-    pass
+    character["level"] += 1
+    update_stats = calculate_stats(character["class"], character["level"])
+    if update_stats != None:
+        character["strength"] = update_stats[0]
+        character["magic"] = update_stats[1]
+        character["health"] = update_stats[2]
+    character["gold"] += 55
 
+    print(f"{character['name']} Leveled Up! {character['name']}'s New Level Is: {character['level']}")
 # Main program area (optional - for testing your functions)
 if __name__ == "__main__":
     print("=== CHARACTER CREATOR ===")
@@ -100,3 +175,7 @@ if __name__ == "__main__":
     # display_character(char)
     # save_character(char, "my_character.txt")
     # loaded = load_character("my_character.txt")
+    char = create_character("Kami", "wizard")
+    display_character(char)
+    save_character(char, "my_character.txt")
+    loaded_char = load_character("my_character.txt")character.txt")
