@@ -6,6 +6,8 @@ Date: 10-20-2025
 AI Usage: [Document any AI assistance used]
 Example: AI helped with file I/O error handling logic in save_character function
 """
+import os
+
 def create_character(name, character_class='Monk'):
     """
     Creates a new character dictionary with calculated stats
@@ -29,15 +31,15 @@ def create_character(name, character_class='Monk'):
 
     # Gold Values
     if character_class == "Wizard":
-        gold = 100
+        char_gold = 100
     elif character_class == "Sorcerer":
-        gold = 80
+        char_gold = 80
     elif character_class == "Warlock":
-        gold = 75
+        char_gold = 75
     elif character_class == "Barbarian":
-        gold = 60
+        char_gold = 60
     elif character_class == "Monk":
-        gold = 45
+        char_gold = 45
 
     character = {
         "name": name,
@@ -46,7 +48,7 @@ def create_character(name, character_class='Monk'):
         "strength": character_stats[0],
         "magic": character_stats[1],
         "health": character_stats[2],
-        "gold": gold
+        "gold": char_gold
 }
     return character
 
@@ -85,7 +87,7 @@ def calculate_stats(character_class, level):
         health = 50 + (level * 3)
     else:
         return None
-    return (strength, magic, health)
+    return strength, magic, health
 
 def save_character(character, filename):
     """
@@ -103,6 +105,11 @@ def save_character(character, filename):
     """
     # TODO: Implement this function
     # Remember to handle file errors gracefully
+    valid_keys = ["Name", "Class", "Level", "Strength", "Magic", "Health", "Gold"]
+    for key in valid_keys:
+        if key not in character:
+            return False
+
     with open(filename, "w") as file:
         file.write(f"Character name: {character["name"]}\n")
         file.write(f"Class: {character["class"]}\n")
@@ -120,7 +127,35 @@ def load_character(filename):
     """
     # TODO: Implement this function
     # Remember to handle file not found errors
-    pass
+    if os.path.exists(filename) != True:
+        print("File not found")
+        return None
+
+    with open(filename, "r") as file:
+        lines = file.readlines()
+
+    character = {}
+    key_map = {
+        "Character Name": "name",
+        "Class": "class",
+        "Level": "level",
+        "Strength": "strength",
+        "Magic": "magic",
+        "Health": "health",
+        "Gold": "gold"
+    }
+
+    for line in lines:
+        line = line.strip()
+        if ": " in line:
+            key, value = line.split(": ", 1)
+            if key in key_map:
+                new_key = key_map[key]
+                if new_key in ["level", "strength", "magic", "health", "gold"]:
+                    character[new_key] = int(value)
+                else:
+                    character[new_key] = value
+    return character
 
 def display_character(character):
     """
@@ -158,7 +193,7 @@ def level_up(character):
     # Remember to recalculate stats for the new level
     character["level"] += 1
     update_stats = calculate_stats(character["class"], character["level"])
-    if update_stats != None:
+    if update_stats is not None:
         character["strength"] = update_stats[0]
         character["magic"] = update_stats[1]
         character["health"] = update_stats[2]
@@ -178,4 +213,4 @@ if __name__ == "__main__":
     char = create_character("Kami", "wizard")
     display_character(char)
     save_character(char, "my_character.txt")
-    loaded_char = load_character("my_character.txt")character.txt")
+    loaded_char = load_character("my_character.txt")
