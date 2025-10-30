@@ -31,15 +31,15 @@ def create_character(name, character_class='Monk'):
 
     # Gold Values
     if character_class == "Warrior":
-        char_gold = 100
+        gold = 100
     elif character_class == "Mage":
-        char_gold = 80
+        gold = 80
     elif character_class == "Rogue":
-        char_gold = 75
+        gold = 75
     elif character_class == "Cleric":
-        char_gold = 60
+        gold = 60
     else:
-        char_gold = 25
+        gold = 25
 
     character = {
         "name": name,
@@ -48,7 +48,7 @@ def create_character(name, character_class='Monk'):
         "strength": character_stats[0],
         "magic": character_stats[1],
         "health": character_stats[2],
-        "gold": char_gold
+        "gold": gold
 }
     return character
 
@@ -85,6 +85,7 @@ def calculate_stats(character_class, level):
         strength = 5 + (level * 2)
         magic = 5 + (level * 2)
         health = 80 + (level * 2)
+
     return strength, magic, health
 
 def save_character(character, filename):
@@ -103,13 +104,13 @@ def save_character(character, filename):
     """
     # TODO: Implement this function
     # Remember to handle file errors gracefully
-    valid_keys = ["name", "class", "level", "strength", "magic", "health", "gold"]
-    for key in valid_keys:
+    required_keys = ["name", "class", "level", "strength", "magic", "health", "gold"]
+    for key in required_keys:
         if key not in character:
             return False
 
     with open(filename, "w") as file:
-        file.write(f"Character name: {character["name"]}\n")
+        file.write(f"Character Name: {character["name"]}\n")
         file.write(f"Class: {character["class"]}\n")
         file.write(f"Level: {character["level"]}\n")
         file.write(f"Strength: {character["strength"]}\n")
@@ -117,7 +118,7 @@ def save_character(character, filename):
         file.write(f"Health: {character["health"]}\n")
         file.write(f"Gold: {character["gold"]}\n")
     return True
-    
+
 def load_character(filename):
     """
     Loads character from text file
@@ -125,7 +126,7 @@ def load_character(filename):
     """
     # TODO: Implement this function
     # Remember to handle file not found errors
-    if os.path.exists(filename) != True:
+    if not os.path.exists(filename):
         print("File not found")
         return None
 
@@ -195,7 +196,7 @@ def level_up(character):
         character["strength"] = update_stats[0]
         character["magic"] = update_stats[1]
         character["health"] = update_stats[2]
-    character["gold"] += 55
+    character["gold"] += 50
 
     print(f"{character['name']} Leveled Up! {character['name']}'s New Level Is: {character['level']}")
 # Main program area (optional - for testing your functions)
