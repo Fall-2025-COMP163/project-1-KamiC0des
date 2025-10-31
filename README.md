@@ -5,95 +5,28 @@
 
 Build a text-based RPG character creation and story progression system that demonstrates mastery of functions and file I/O operations.
 
-# Required Functions 
-Complete these functions in project1_starter.py:
+# What's Your RPG About? 
+My RPG is about creating fantasy characters like Warriors, Mages, Rogues, and Clerics. Each character has different strengths, magic power, and health based on their class. Players can create a character, view their stats, level them up, and save or load their progress. It’s a type of character-building system like what you’d find in a larger RPG game.
 
-create_character(name, character_class) - Create new character
+# Design Choices
+I chose these formulas so each class feels unique and fits its role.
+- Warriors get more strength and health to be strong fighters.
+- Mages gain more magic since they focus on spells.
+- Rogues have balanced stats for agility and flexibility.
+- Clerics have high health and strength for support and defense.
+The formulas also scale with level so characters grow stronger as they play.
 
-calculate_stats(character_class, level) - Calculate character stats
+# Bonus Creative Features
+- I added code that sets the default class to a "Monk" so if the player doesn't   input a class, they automatically received the class and stats of a Monk.
+  
+- When a character levels up, I created it to where the character receives an extra 50 gold.
 
-save_character(character, filename) - Save character to file
-
-load_character(filename) - Load character from file
-
-display_character(character) - Display character info
-
-level_up(character) - Increase character level
-
-# 🎭 Character Classes
-Implement these character classes with unique stat distributions:
-
-
-Warrior: High strength, low magic, high health
-
-Mage: Low strength, high magic, medium health
-
-Rogue: Medium strength, medium magic, low health
-
-Cleric: Medium strength, high magic, high health
-
-# 📁 Required File Format
-Your save_character() function must create files in this exact format:
-
-Character Name: [name]
-
-Class: [class]
-
-Level: [level]
-
-Strength: [strength]
-
-Magic: [magic]
-
-Health: [health]
-
-Gold: [gold]
-
-
-# Run specific test file
-python -m pytest tests/test_character_creation.py -v
-
-# Test your main program
+# AI Usage
+- Help fix logic and file handling issues in save_character() and
+  load_character() (without using try/except).
+ 
+- Clarify how to handle invalid paths and class validation more efficiently.
+  
+- Suggest improvements with formatting.
+# How To Run
 python project1_starter.py
-
-GitHub Testing:
-
-After pushing your code, check the Actions tab to see automated test results:
-
-✅ Green checkmarks = tests passed
-❌ Red X's = tests failed (click to see details)
-
-# ⚠️ Important Notes
-Protected Files
-
-DO NOT MODIFY files in the tests/ directory
-
-DO NOT MODIFY files in the .github/ directory
-
-Modifying protected files will result in automatic academic integrity violation
-
-# AI Usage Policy
-
-✅ Allowed: AI assistance for implementation, debugging, learning
-
-📝 Required: Document AI usage in code comments
-
-🎯 Must be able to explain: Every line of code during interview
-
-# 📝 Submission Checklist
-
- All required functions implemented
- 
- Code passes all automated tests
- 
- README updated with your documentation
- 
- Interview scheduled and completed
- 
- AI usage documented in code comments
-
-# 🏆 Grading
-
-Implementation (70%): Function correctness, file operations, error handling
-
-Interview (30%): Code explanation and live coding challenge
