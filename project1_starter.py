@@ -62,11 +62,11 @@ def calculate_stats(character_class, level):
     Calculates base stats based on class and level
     Returns: tuple of (strength, magic, health)
 
-    - Wizards: Medium strength, high magic, medium health
-    - Sorcerers: Medium strength, medium magic, low health
-    - Warlocks: Low strength, medium magic, medium health
-    - Barbarians: High strength, low magic, high health
-    - Monks: High strength, low magic, low health
+    - Warriors: Medium strength, high magic, medium health
+    - Mage: Medium strength, medium magic, low health
+    - Rogues Low strength, medium magic, medium health
+    - Clerics: High strength, low magic, high health
+    - Default: Low strength, low magic, high health
     """
     # TODO: Implement this function
     # Return a tuple: (strength, magic, health)
