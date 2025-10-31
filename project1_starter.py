@@ -109,6 +109,10 @@ def save_character(character, filename):
         if key not in character:
             return False
 
+    path = os.path.split(filename)[0]
+    if path and not os.path.exists(path):
+        return False
+
     with open(filename, "w") as file:
         file.write(f"Character Name: {character["name"]}\n")
         file.write(f"Class: {character["class"]}\n")
